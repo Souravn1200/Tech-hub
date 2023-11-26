@@ -1,11 +1,12 @@
 import React, {useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
 
     const navigate = useNavigate();
-    const { logIn} = useContext(AuthContext)
+    const { logIn, singInWithGoogle} = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
 
     const handleLogin = e => {
@@ -26,6 +27,16 @@ const Login = () => {
         })
     }
    
+
+const handleGoogleSignIn = () => {
+    singInWithGoogle()
+    .then(result => {
+        navigate('/')
+    })
+    .catch(error => {
+        setLoginError(error.message)
+    })
+}
 
     return (
 
@@ -61,8 +72,8 @@ const Login = () => {
                     </div>
                 </form>
 
-                <div className="form-control mt-6 w-1/2 mx-auto">
-                    <button className="btn text-white bg-[#3d657a] hover:bg-[#6096B4]">Register By Google</button>
+                <div className="form-control mt-6 w-2/3 mx-auto">
+                    <button onClick={handleGoogleSignIn} className="btn p-1 text-white bg-[#3d657a] hover:bg-[#6096B4]"> <FaGoogle /> Register By Google</button>
                 </div>
 
                 <p className="text-center mt-4">Do not have an account?  <Link className="text-blue-600 font-bold" to="/register">Register</Link></p>
