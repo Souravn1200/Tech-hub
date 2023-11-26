@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FeaturedProductCard = ({ item }) => {
 
@@ -9,17 +10,22 @@ const FeaturedProductCard = ({ item }) => {
             <div className="card bg-base-100 shadow-xl">
                 <figure><img className='w-full h-48 object-cover' src={product_image} alt="Shoes" /></figure>
                 <div className="card-body">
+
+
+                    <div className='flex gap-5 items-center justify-center'>
+
+                        <Link to={`/product/${_id}`}>
                     <h2 className="card-title">
                         {product_name}
-                        <div className="badge badge-secondary">Featured!</div>
                     </h2>
+                    </Link>
+                          <div className="badge badge-secondary">Featured!</div>                   
 
+                    </div>
                     <div className="card-actions justify-start">
                         <div className="badge badge-outline">{tag}</div>
 
                     </div>
-
-
 
 
 
