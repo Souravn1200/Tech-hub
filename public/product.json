@@ -1,0 +1,75 @@
+[
+    {
+    
+      "product_name": "JBL Speaker",
+      "product_image": "https://media.karousell.com/media/photos/products/2023/2/2/jbl_xtreme_3_speaker_with_1_ye_1675328264_e4e4c33a_progressive",
+      "tag": "Speaker",
+      "votes": [],
+      "isFeatured": true,
+      "isTrending": true
+    },
+    {
+    
+      "product_name": "Charger- IOS",
+      "product_image": "https://i.insider.com/5f835d4ebab422001979aaeb",
+      "tag": "Smartphone",
+      "votes": [],
+      "isFeatured": false,
+      "isTrending": false
+    },
+    {
+    
+      "product_name": "Oculus VR",
+      "product_image": "https://media.wired.com/photos/5927287dac01987bf0138a97/master/pass/IMG_2569.jpg",
+      "tag": "VR Headset",
+      "votes": [],
+      "isFeatured": true,
+      "isTrending": true
+    },
+    {
+    
+      "product_name": "Micro W26",
+      "product_image": "https://fdn.xiaomiui.net/wp-content/uploads/2022/09/Xiaomi-Watch-S1-Images-0-1.jpg?strip=all&lossy=1&w=2560&ssl=1",
+      "tag": "Smartwatch",
+      "votes": [],
+      "isFeatured": false,
+      "isTrending": true
+    },
+    {
+    
+      "product_name": "Fuji X Serise",
+      "product_image": "https://asset.fujifilm.com/www/de/files/2023-05/03ef64853918e8ea26eb2a518f56260f/pic_xsystem_01.jpg",
+      "tag": "Camera",
+      "votes": [],
+      "isFeatured": true,
+      "isTrending": false
+    },
+    {
+    
+      "product_name": "Sony WH-Xb",
+      "product_image": "https://www.sony.com.ph/image/09ab57a0aa096113a1fec93d5bdc6b97?fmt=png-alpha&wid=1200",
+      "tag": "Headphones",
+      "votes": [],
+      "isFeatured": false,
+      "isTrending": true
+    },
+    {
+    
+      "product_name": "Zero - Xpro",
+      "product_image": "https://www.jbhifi.com.au/cdn/shop/products/597035-Product-0-I-637953082977335564.jpg?v=1660011825",
+      "tag": "Drone",
+      "votes": [],
+      "isFeatured": true,
+      "isTrending": false
+    },
+    {
+    
+      "product_name": "Verjo Areo VR",
+      "product_image": "https://www.cnet.com/a/img/resize/6edc40fc6e691cc4f6433aebef1d7131c91f903c/hub/2021/10/20/a3a56aa6-eba3-4d22-b11e-448ea8eca3ee/varjo-aero-product-image.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "tag": "VR Headset",
+      "votes": [],
+      "isFeatured": false,
+      "isTrending": true
+    }
+  ]
+  
