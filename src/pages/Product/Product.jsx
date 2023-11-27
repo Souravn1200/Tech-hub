@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { AuthContext } from '../../Providers/AuthProviders';
+import axios from 'axios';
+
 
 const Product = () => {
 
     const {user} = useContext(AuthContext)
-    
+    const navigate = useNavigate()
     const { isFeatured, isTrending, product_image, product_name, tag, votes, _id } = useLoaderData();
     console.log(isFeatured, isTrending, product_image, product_name, tag, votes, _id);
 
@@ -20,16 +22,33 @@ const Product = () => {
     const handleComment = e => {
         e.preventDefault();
 
-        const form  =  new FormData(e.currentTarget)
-        const comment = form.get('comment');
-        const commentId = _id;
+        if(user && user?.email) {
+            const form  =  new FormData(e.currentTarget)
+        const userComment = form.get('comment');
+        const commentId = _id
         const displayName = user.displayName
     
         
-       
-       
-        
+       const comment = {
+
+        userComment,
+        commentId,
+        displayName
     }
+
+    axios.post('http://localhost:5000/comments', comment)
+    .then(res => {
+        console.log(res);
+    })
+        }
+
+    else{
+        navigate('/')
+    }
+        
+};
+
+
     return (
 
         <div className="container mx-auto px-4 py-8">
@@ -100,6 +119,7 @@ const Product = () => {
 
         </div>
     );
-};
 
+
+}
 export default Product;
