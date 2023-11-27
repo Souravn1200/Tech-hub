@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import Product from "../pages/Product/Product";
+import SeachProductCard from "../components/SeachProductCard";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,8 @@ export const router = createBrowserRouter([
         path: 'product/:id',
         loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`),
         element: <Product></Product>
-      }
+      },
+    
     ]
   },
 ]);

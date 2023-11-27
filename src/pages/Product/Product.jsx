@@ -3,17 +3,24 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { AuthContext } from '../../Providers/AuthProviders';
 import axios from 'axios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import CommentCard from '../../components/CommentCard';
 
 
 const Product = () => {
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     const { isFeatured, isTrending, product_image, product_name, tag, votes, _id } = useLoaderData();
     console.log(isFeatured, isTrending, product_image, product_name, tag, votes, _id);
+    const axiosSecure = useAxiosSecure()
+
+    const [newComment, setNewComment] = useState([])
 
 
     const [isLiked, setIsLiked] = useState(false);
+
+
 
     const handleLikeClick = () => {
         setIsLiked(!isLiked);
@@ -22,31 +29,40 @@ const Product = () => {
     const handleComment = e => {
         e.preventDefault();
 
-        if(user && user?.email) {
-            const form  =  new FormData(e.currentTarget)
-        const userComment = form.get('comment');
-        const commentId = _id
-        const displayName = user.displayName
-    
-        
-       const comment = {
+        if (user && user?.email) {
+            const form = new FormData(e.currentTarget)
+            const userComment = form.get('comment');
+            const commentId = _id
+            const displayName = user?.displayName
+            const comment = {
+                userComment,
+                commentId,
+                displayName
+            }
 
-        userComment,
-        commentId,
-        displayName
-    }
-
-    axios.post('http://localhost:5000/comments', comment)
-    .then(res => {
-        console.log(res);
-    })
+            axios.post('http://localhost:5000/comments', comment)
+                .then(res => {
+                    console.log(res);
+                })
         }
 
-    else{
-        navigate('/')
-    }
-        
-};
+        else {
+            navigate('/')
+        }
+
+    };
+
+
+    axios.get(`http://localhost:5000/comments/${_id}`)
+        .then(res => {
+            console.log(res.data)
+            setNewComment(res.data)
+        })
+        .then(err => {
+            console.log(err);
+        })
+
+
 
 
     return (
@@ -103,6 +119,12 @@ const Product = () => {
 
 
                 <form className="mb-4" onSubmit={handleComment}>
+                    <div className='flex gap-3 mb-3 items-end justify-start'>
+
+                        <img src={user?.photoURL} className="h-12 w-12 rounded-[50%] object-cover" alt="" />
+                        <p className='pb-4'>Comment as: <span className='font-bold'>{user?.displayName}</span></p>
+                    </div>
+
                     <textarea placeholder="write your comment" name='comment' className="textarea border-black textarea-lg w-full max-w-xs" ></textarea>
 
                     <br />
@@ -116,6 +138,10 @@ const Product = () => {
                 </form>
 
             </div>
+
+            {
+                newComment.map(item => <CommentCard key={item._id} item={item}></CommentCard>)
+            }
 
         </div>
     );
