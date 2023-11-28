@@ -1,28 +1,30 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../Providers/AuthProviders";
 
 
 const Myprofile = () => {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
+    const {user} = useContext(AuthContext);
+  const [isSubscribed, setIsSubscribed] = useState(true);
+  const subscriptionAmount = '$9.99';
   const handleSubscribe = () => {
     setIsSubscribed(true);
   };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8">
+        <div className="flex justify-left items-center">
+      <div className="shadow-md rounded-lg p-8">
         <h1 className="text-3xl font-semibold mb-4">User Profile</h1>
         <div className="flex items-center mb-6">
           <div className="w-20 h-20 rounded-full overflow-hidden">
             <img
-              src="https://via.placeholder.com/150"
+              src={user?.photoURL}
               alt="User's Profile"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="ml-4">
-            <h2 className="text-xl font-semibold">John Doe</h2>
-            <p className="text-gray-600">john@example.com</p>
+            <h2 className="text-xl font-semibold">{user?.displayName}</h2>
+            <p className="text-gray-600">{user?.email}</p>
           </div>
         </div>
         {!isSubscribed && (
