@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex w-screen">
       <div className="w-1/4 bg-gray-800 text-white">
         {/* Side panel */}
         <div className="p-4">

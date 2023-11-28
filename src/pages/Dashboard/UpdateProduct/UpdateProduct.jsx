@@ -1,16 +1,22 @@
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../../Providers/AuthProviders';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { AuthContext } from '../../../Providers/AuthProviders';
 
-const Addproduct = () => {
 
+const UpdateProduct = () => {
+    const {product_name,product_image,description,externalLinks,tag, _id} = useLoaderData()
     const {user} = useContext(AuthContext);
+    const navigate = useNavigate()
 
-    const [productName, setProductName] = useState('');
-    const [productImage, setProductImage] = useState('');
-    const [description, setDescription] = useState('');
-    const [externalLinks, setExternalLinks] = useState('');
-    const [selectedOption, setSelectedOption] = useState('');
+    console.log(product_name);
+
+    const [productName, setProductName] = useState(product_name || '');
+    const [productImage, setProductImage] = useState(product_image || '');
+    const [ddescription, setDescription] = useState(description || '');
+    const [eexternalLinks, setExternalLinks] = useState(externalLinks || '');
+    const [selectedOption, setSelectedOption] = useState(tag || '');
+  
     const axiosSecure = useAxiosSecure()
 
     const handleSelectChange = (e) => {
@@ -29,12 +35,12 @@ const Addproduct = () => {
       const formData = {
         product_name:productName,
         product_image:productImage,
-        description,
+        ddescription,
         votes,
         isFeatured,
         isTrending,
         tag:selectedOption,
-        externalLinks,
+        eexternalLinks,
         ownerName: user?.displayName,
         ownerImage: user?.photoURL,
         ownerEmail: user?.email,
@@ -46,15 +52,11 @@ const Addproduct = () => {
 
       // Sending formData to MongoDB server
       console.log(formData);
-      axiosSecure.post('/products', formData)
+      axiosSecure.patch(`/update/${_id}`, formData)
       .then(res => {
         console.log(res.data);
         if(res.data.acknowledged === true) {
-            setProductName('');
-            setProductImage('');
-            setDescription('');
-            setExternalLinks('');
-            setSelectedOption('');
+            navigate('/dashboard/myproducts')
           }
       })
       .then(err=> {
@@ -62,16 +64,18 @@ const Addproduct = () => {
       })
       
     };
-
-    
     return (
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+        <div>
+                <h2 className='mt-5 mb-5 text-3xl w-[300px] mx-auto'>Update Product</h2>
+            
+                <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
       <div className="mb-4">
         <label htmlFor="productName" className="block font-semibold mb-1">
           Product Name<span className="text-red-500">*</span>
         </label>
         <input
           type="text"
+          defaultValue={product_name}
           id="productName"
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
@@ -85,6 +89,7 @@ const Addproduct = () => {
         </label>
         <input
           type="text"
+          defaultValue={product_image}
           id="productImage"
           value={productImage}
           onChange={(e) => setProductImage(e.target.value)}
@@ -93,12 +98,12 @@ const Addproduct = () => {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="description" className="block font-semibold mb-1">
+        <label htmlFor="ddescription" className="block font-semibold mb-1">
           Description<span className="text-red-500">*</span>
         </label>
         <textarea
-          id="description"
-          value={description}
+          id="ddescription"
+          value={ddescription}
           onChange={(e) => setDescription(e.target.value)}
           className="border border-gray-300 px-3 py-2 rounded-md w-full"
           required
@@ -140,13 +145,13 @@ const Addproduct = () => {
       </select>
       </div>
       <div className="flex items-center justify-between mb-4">
-        <label htmlFor="externalLinks" className="block font-semibold mb-1 w-5/12">
+        <label htmlFor="eexternalLinks" className="block font-semibold mb-1 w-5/12">
           External Links
         </label>
         <input
           type="text"
-          id="externalLinks"
-          value={externalLinks}
+          id="eexternalLinks"
+          value={eexternalLinks}
           onChange={(e) => setExternalLinks(e.target.value)}
           className="border border-gray-300 px-3 py-2 mr-24 rounded-md w-87/12"
         />
@@ -154,11 +159,12 @@ const Addproduct = () => {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2"
         >
-          Add Product
+          Update
         </button>
       </div>
     </form>
+        </div>
     );
 };
 
-export default Addproduct;
+export default UpdateProduct;
