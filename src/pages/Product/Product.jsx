@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { AuthContext } from '../../Providers/AuthProviders';
-import axios from 'axios';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import CommentCard from '../../components/CommentCard';
 
@@ -40,9 +39,10 @@ const Product = () => {
                 displayName
             }
 
-            axios.post('http://localhost:5000/comments', comment)
+            axiosSecure.post('/comments', comment)
                 .then(res => {
                     console.log(res);
+                    console.log(res.insertedId);
                 })
         }
 
@@ -53,7 +53,7 @@ const Product = () => {
     };
 
 
-    axios.get(`http://localhost:5000/comments/${_id}`)
+    axiosSecure.get(`/comments/${_id}`)
         .then(res => {
             console.log(res.data)
             setNewComment(res.data)

@@ -12,7 +12,7 @@ const Navbar = () => {
          user ?  <></> :<li className='mr-1'> <NavLink to="/login">Login</NavLink></li>
         
     }
-        <li className='mr-1 font-thin'> <NavLink to="/rooms">Rooms</NavLink></li>
+        <li className='mr-1 font-thin'> <NavLink to="/products">Products</NavLink></li>
         <li className='mr-1 font-thin'> <NavLink to="/mybooking">My Bookings</NavLink></li>
 
     </>

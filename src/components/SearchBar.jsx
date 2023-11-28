@@ -2,10 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SeachProductCard from './SeachProductCard';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const SearchBar = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [searchedItem, setsearchedItem] = useState('');
+    const axiosSecure = useAxiosSecure()
+
 
     const handleSelectChange = (e) => {
       setSelectedOption(e.target.value);
@@ -14,7 +17,7 @@ const SearchBar = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       
-      axios.get(`http://localhost:5000/search/${selectedOption}`)
+      axiosSecure.get(`/search/${selectedOption}`)
       .then(res => {
         console.log(res.data);
         setsearchedItem(res.data)
@@ -61,11 +64,12 @@ const SearchBar = () => {
           searchedItem.map(item => <SeachProductCard key={item._id} item={item}></SeachProductCard>)
         }
         </div>
+
+        <div className='divider w-2/3 mx-auto mt-10'>
+
+            </div>
     </div> : <></>
     }
-
-
-
 
   </div>
   );
