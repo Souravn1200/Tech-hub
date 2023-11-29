@@ -47,7 +47,11 @@ const Registration = () => {
 
                 const userInfo = {
                     name,
-                    email
+                    email,
+                    isUser : true,
+                    isAdmin : false,
+                    isMod : false
+
                 }
 
                 axiosPublic.post('/users', userInfo)

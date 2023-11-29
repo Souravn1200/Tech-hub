@@ -35,7 +35,11 @@ const handleGoogleSignIn = () => {
     .then(result => {
         const userInfo = {
             email: result.user?.email,
-            name: result.user?.displayName
+            name: result.user?.displayName,
+            isUser : true,
+            isAdmin : false,
+            isMod : false
+
         }
         axiosPublic.post('/users', userInfo)
         .then(res => {

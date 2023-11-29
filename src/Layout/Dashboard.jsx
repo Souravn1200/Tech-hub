@@ -1,11 +1,11 @@
 import React from 'react';
-import { FaCompressAlt, FaHome, FaListAlt, FaQuora, FaSave, FaSearch, FaUser } from 'react-icons/fa';
+import { FaCompressAlt, FaHome, FaListAlt, FaPeopleArrows, FaPeopleCarry, FaQuora, FaSave, FaSearch, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
 //todo ismod is admi thik kortehobe
-  const isMod = true
-  const isAdmin = false;
+  const isMod = false
+  const isAdmin = true;
 
   return (
     <div className="flex w-screen h-screen">
@@ -26,10 +26,10 @@ const Dashboard = () => {
             </li>
 
             <li className="flex items-center gap-2 mb-3">
-            <FaListAlt />
+            <FaPeopleArrows></FaPeopleArrows>
               <NavLink
-                to="/dashboard/addproduct" className="hover:text-white"
-                activeClassName="font-bold">  Add Product </NavLink>
+                to="/dashboard/manageusers" className="hover:text-white"
+                activeClassName="font-bold"> Manage Users </NavLink>
             </li>
 
             <li className="flex items-center gap-2 mb-3">

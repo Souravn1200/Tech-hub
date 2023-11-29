@@ -14,6 +14,7 @@ import Myproduct from "../pages/Dashboard/Myproduct/Myproduct";
 import UpdateProduct from "../pages/Dashboard/UpdateProduct/UpdateProduct";
 import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
 import ReportedContent from "../pages/Dashboard/ReportedContent/ReportedContent";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path:'reportedcontent',
         element:<ReportedContent></ReportedContent>
+      },
+      {
+        path:'manageusers',
+        element:<ManageUsers></ManageUsers>
       }
     ]
   }
