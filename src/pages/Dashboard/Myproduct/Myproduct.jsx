@@ -28,6 +28,19 @@ const Myproduct = () => {
   const handleDelete = (productId) => {
     // Logic for deleting a product
     console.log(`Deleting product with ID: ${productId}`);
+
+    axiosSecure.delete(`delete/${productId}`)
+    .then(res => {
+      console.log(res.data);
+      if(res.data.acknowledged === true) {
+        const remaing = products.filter(del => del._id !== productId)
+        setProducts(remaing)
+        
+      } else{
+        console.log('delete error');
+      }
+    })
+    
   };
     return (
         <div className="max-w-3xl mx-auto">

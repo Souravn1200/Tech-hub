@@ -2,12 +2,14 @@ import React, {useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { FaGoogle } from 'react-icons/fa';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Login = () => {
 
     const navigate = useNavigate();
     const { logIn, singInWithGoogle} = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
+    const axiosPublic = useAxiosPublic()
 
     const handleLogin = e => {
         e.preventDefault();
@@ -31,7 +33,16 @@ const Login = () => {
 const handleGoogleSignIn = () => {
     singInWithGoogle()
     .then(result => {
-        navigate('/')
+        const userInfo = {
+            email: result.user?.email,
+            name: result.user?.displayName
+        }
+        axiosPublic.post('/users', userInfo)
+        .then(res => {
+            console.log(res.data);
+            navigate('/')
+        })
+       
     })
     .catch(error => {
         setLoginError(error.message)

@@ -3,6 +3,9 @@ import { FaListAlt, FaSearch, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
+
+  const isAdmin = true
+
   return (
     <div className="flex w-screen">
       <div className="w-1/4 bg-gray-800 text-white">

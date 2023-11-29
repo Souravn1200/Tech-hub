@@ -2,10 +2,13 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { updateProfile } from 'firebase/auth';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2'
 
 
 const Registration = () => {
 
+    const axiosPublic = useAxiosPublic()
     const {createUser,logOut} = useContext(AuthContext)
 
     const [regiError, setRegiError] = useState('')
@@ -40,7 +43,29 @@ const Registration = () => {
                 photoURL: photoURL,
                 displayName: name
             })
+            .then(() => {
+
+                const userInfo = {
+                    name,
+                    email
+                }
+
+                axiosPublic.post('/users', userInfo)
+                .then(res => {
+                    if(res.data.insertedId){
+                        console.log('User added to DB');
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Succesfully regitered!!",
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
+                    }
+                })
+            })
             
+
             logOut();
             navigate('/login')
             
