@@ -12,6 +12,8 @@ import Myprofile from "../pages/Dashboard/Myprofile/Myprofile";
 import Addproduct from "../pages/Dashboard/Addproduct/Addproduct";
 import Myproduct from "../pages/Dashboard/Myproduct/Myproduct";
 import UpdateProduct from "../pages/Dashboard/UpdateProduct/UpdateProduct";
+import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
+import ReportedContent from "../pages/Dashboard/ReportedContent/ReportedContent";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +66,14 @@ export const router = createBrowserRouter([
         path: 'updateproduct/:id',
         loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`),
         element: <UpdateProduct></UpdateProduct>
+      },
+      {
+        path:'prodcutreviewqueue',
+        element:<ProductReviewQueue></ProductReviewQueue>
+      },
+      {
+        path:'reportedcontent',
+        element:<ReportedContent></ReportedContent>
       }
     ]
   }

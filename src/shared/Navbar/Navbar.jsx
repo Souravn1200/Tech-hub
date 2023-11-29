@@ -64,7 +64,7 @@ console.log(user);
                                 
                                 <li className="pointer-events-none mb-2">{user?.displayName}</li>
                                 <li>
-                                    <button className=" mb-2 text-white py-2 px-4 rounded-md bg-[#6096B4] hover:bg-[#3d657a]">Dashboard</button>
+                                    <Link className=" mb-2 text-white py-2 px-4 rounded-md bg-[#6096B4] hover:bg-[#3d657a]" to='/dashboard'> <button >Dashboard</button></Link>
                                 </li>
                                 <li>
                                     <button onClick={handleLogOut} className=" mb-2 text-white py-2 px-4 rounded-md bg-[#6096B4] hover:bg-[#3d657a]">Logout</button>

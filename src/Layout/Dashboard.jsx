@@ -1,19 +1,23 @@
 import React from 'react';
-import { FaListAlt, FaSearch, FaUser } from 'react-icons/fa';
+import { FaCompressAlt, FaHome, FaListAlt, FaQuora, FaSearch, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
 
-  const isAdmin = true
+  const isMod = true
+  const isAdmin = false;
 
   return (
-    <div className="flex w-screen">
+    <div className="flex w-screen h-screen">
       <div className="w-1/4 bg-gray-800 text-white">
         {/* Side panel */}
         <div className="p-4">
           <h3 className="text-lg font-semibold mb-4">Dashboard Menu</h3>
           <ul className="text-gray-300">
 
+
+          {
+            isAdmin ? <>
             <li className=" flex items-center gap-2 mb-3 ">
             <FaUser></FaUser>
               <NavLink
@@ -36,7 +40,69 @@ const Dashboard = () => {
                 activeClassName="font-bold">  My Products </NavLink>
             </li>
 
+            <li className="mb-2">
+              <NavLink
+                to="/dashboard/overview"
+                className="hover:text-white"
+                activeClassName="font-bold"
+              >
+                Overview
+              </NavLink>
+            </li>
+</> : <></>
+          }
 
+          {
+            isMod ? <>
+            <li className=" flex items-center gap-2 mb-3 ">
+            <FaQuora></FaQuora>
+              <NavLink
+                to="/dashboard/prodcutreviewqueue" className="hover:text-white"
+                activeClassName="font-bold">  Product Reviewe Queue </NavLink>
+            </li>
+
+            <li className="flex items-center gap-2 mb-3">
+            <FaCompressAlt></FaCompressAlt>
+              <NavLink
+                to="/dashboard/reportedcontent" className="hover:text-white"
+                activeClassName="font-bold">  Repoted Contents </NavLink>
+            </li>
+
+          
+</> : <></>
+          }
+
+
+
+
+
+            <div className="divider divider-info">General</div>
+
+
+
+
+
+            <li className=" flex items-center gap-2 mb-3 ">
+            <FaHome></FaHome>
+              <NavLink
+                to="/" className="hover:text-white"
+                activeClassName="font-bold">  Home </NavLink>
+            </li>
+
+            <li className="flex items-center gap-2 mb-3">
+            <FaListAlt />
+              <NavLink
+                to="/products" className="hover:text-white"
+                activeClassName="font-bold"> Products </NavLink>
+            </li>
+
+            <li className="flex items-center gap-2 mb-3">
+            
+            <FaSearch />
+              <NavLink
+                to="/dashboard/myproducts" className="hover:text-white"
+                activeClassName="font-bold">  My Products </NavLink>
+            </li>
 
             <li className="mb-2">
               <NavLink

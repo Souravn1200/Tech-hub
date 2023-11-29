@@ -65,8 +65,11 @@ const UpdateProduct = () => {
       
     };
     return (
-        <div>
-                <h2 className='mt-5 mb-5 text-3xl w-[300px] mx-auto'>Update Product</h2>
+<div>
+  
+
+
+        <div className=' flex'>      
             
                 <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
       <div className="mb-4">
@@ -164,6 +167,7 @@ const UpdateProduct = () => {
       </div>
     </form>
         </div>
+</div>
     );
 };
 
