@@ -22,6 +22,7 @@ const Addproduct = () => {
    const isFeatured = false;
     const isTrending = false;
     const status = 'Pending'
+    const isReported = false
     
   
     const handleSubmit = (e) => {
@@ -39,7 +40,8 @@ const Addproduct = () => {
         ownerName: user?.displayName,
         ownerImage: user?.photoURL,
         ownerEmail: user?.email,
-        status
+        status,
+        isReported
 
 
       };

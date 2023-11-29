@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { AuthContext } from '../../Providers/AuthProviders';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import CommentCard from '../../components/CommentCard';
+import Swal from 'sweetalert2';
 
 
 const Product = () => {
@@ -11,7 +12,8 @@ const Product = () => {
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     const { isFeatured, isTrending, product_image, product_name, tag, votes, _id } = useLoaderData();
-    console.log(isFeatured, isTrending, product_image, product_name, tag, votes, _id);
+
+    // console.log(isFeatured, isTrending, product_image, product_name, tag, votes, _id);
     const axiosSecure = useAxiosSecure()
 
     const [newComment, setNewComment] = useState([])
@@ -52,16 +54,38 @@ const Product = () => {
 
     };
 
+    const handleReport = (_id) => {
+       const id =_id;
+       axiosSecure.patch(`/prodcutreport/${id}`)
+       .then(res => {
+        if(res.data.modifiedCount > 0 ){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Product Reported",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            
+        }
+       
+    })
+    .then(err => {
+        // console.log(err);
+    })
+    }
 
+  useEffect(() =>{
     axiosSecure.get(`/comments/${_id}`)
-        .then(res => {
-            console.log(res.data)
-            setNewComment(res.data)
-        })
-        .then(err => {
-            console.log(err);
-        })
+    .then(res => {
+        // console.log(res.data)
+        setNewComment(res.data)
+    })
+    .then(err => {
+        // console.log(err);
+    })
 
+  },[axiosSecure,_id])
 
 
 
@@ -114,34 +138,46 @@ const Product = () => {
                 </div>
             </div>
 
-            <div className='mt-5'>
+            <div className='flex mt-5 justify-between'>
+                <div className='mt-5'>
 
 
+                    <form className="mb-4" onSubmit={handleComment}>
+                        <div className='flex gap-3 mb-3 items-end justify-start'>
 
-                <form className="mb-4" onSubmit={handleComment}>
-                    <div className='flex gap-3 mb-3 items-end justify-start'>
+                            <img src={user?.photoURL} className="h-12 w-12 rounded-[50%] object-cover" alt="" />
+                            <p className='pb-4'>Comment as: <span className='font-bold'>{user?.displayName}</span></p>
+                        </div>
 
-                        <img src={user?.photoURL} className="h-12 w-12 rounded-[50%] object-cover" alt="" />
-                        <p className='pb-4'>Comment as: <span className='font-bold'>{user?.displayName}</span></p>
+                        <textarea placeholder="write your comment" name='comment' className="textarea border-black textarea-lg w-full max-w-xs" ></textarea>
+
+                        <br />
+                        <button
+                            type="submit"
+                            className="bg-blue-900 text-white font-bold py-2 px-4 rounded mt-2"
+                        >
+                            Post Comment
+                        </button>
+
+                    </form>
+
+                    <div>
+                        {
+                            newComment.map(item => <CommentCard key={item._id} item={item}></CommentCard>)
+                        }
+
                     </div>
+                </div>
 
-                    <textarea placeholder="write your comment" name='comment' className="textarea border-black textarea-lg w-full max-w-xs" ></textarea>
-
-                    <br />
-                    <button
-                        type="submit"
-                        className="bg-blue-900 text-white font-bold py-2 px-4 rounded mt-2"
-                    >
-                        Post Comment
-                    </button>
-
-                </form>
+                <div>
+                <button className="btn text-white bg-red-900 hover:bg-slate-800 " 
+                    onClick={() => handleReport(_id)}
+                >
+                    Report</button>
+                </div>
 
             </div>
 
-            {
-                newComment.map(item => <CommentCard key={item._id} item={item}></CommentCard>)
-            }
 
         </div>
     );

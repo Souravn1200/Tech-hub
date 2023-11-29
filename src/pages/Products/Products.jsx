@@ -22,7 +22,7 @@ const Products = () => {
             
             
               <div >
-                <h2 className='mt-5 mb-5 text-3xl w-[300px] mx-auto'>Check our Products...</h2>
+                <h2 className='mt-5 mb-5 text-3xl w-[300px] mx-auto'>Check our Products..</h2>
                 <div className='grid md:grid-cols-4 gap-5 px-10'>
             {
                 products?.map(item =>  <div key={item._id}>
