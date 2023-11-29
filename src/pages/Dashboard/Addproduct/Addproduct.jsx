@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProviders';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const Addproduct = () => {
 
@@ -55,6 +56,14 @@ const Addproduct = () => {
             setDescription('');
             setExternalLinks('');
             setSelectedOption('');
+
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Product Added",
+              showConfirmButton: false,
+              timer: 1500
+            });
           }
       })
       .then(err=> {

@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { AuthContext } from '../../../Providers/AuthProviders';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import useProducts from '../../../hooks/useProducts';
 
 const Myproduct = () => {
+  const [product, refetch] = useProducts();
 
     const [products, setProducts] = useState([]);
   const axiosSecure = useAxiosSecure();
@@ -29,17 +32,42 @@ const Myproduct = () => {
     // Logic for deleting a product
     console.log(`Deleting product with ID: ${productId}`);
 
-    axiosSecure.delete(`delete/${productId}`)
-    .then(res => {
-      console.log(res.data);
-      if(res.data.acknowledged === true) {
-        const remaing = products.filter(del => del._id !== productId)
-        setProducts(remaing)
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
         
-      } else{
-        console.log('delete error');
+        axiosSecure.delete(`delete/${productId}`)
+        .then(res => {
+          console.log(res.data);
+          if(res.data.acknowledged === true) {
+            const remaing = products.filter(del => del._id !== productId)
+            setProducts(remaing)
+            
+          } else{
+            console.log('delete error');
+          }
+        })
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
       }
-    })
+    });
+
+
+
+
+   
     
   };
     return (
@@ -59,8 +87,8 @@ const Myproduct = () => {
             <tr key={product._id} className="hover:bg-gray-100">
               <td className="border border-gray-300 px-4 py-2">{product.product_name}</td>
               <td className="border border-gray-300 px-4 py-2">{product.votes.length}</td>
-              <td className="border border-gray-300 px-4 py-2 text-center" style={{ backgroundColor: product.status === true ? '#00ca92' : product.status === false ? '#e84a4a' : '#e8c14a' }}>
-  {product.status === true ? 'Accepted' : product.status === false ? 'Not Accepted' : 'Pending'}
+              <td className="border border-gray-300 px-4 py-2 text-center" style={{ backgroundColor: product.status === 'Accepted' ? '#00ca92' : product.status === 'Rejected' ? '#e84a4a' : '#e8c14a' }}>
+  {product.status === 'Accepted' ? 'Accepted' : product.status === 'Rejected' ? 'Rejected' : 'Pending'}
 </td>
               <td className="border border-gray-300 px-4 py-2 flex items-center justify-evenly">
                 <Link to={`/dashboard/updateproduct/${product._id}`}>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { FaCompressAlt, FaHome, FaListAlt, FaQuora, FaSearch, FaUser } from 'react-icons/fa';
+import { FaCompressAlt, FaHome, FaListAlt, FaQuora, FaSave, FaSearch, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-
+//todo ismod is admi thik kortehobe
   const isMod = true
   const isAdmin = false;
 
@@ -104,13 +104,14 @@ const Dashboard = () => {
                 activeClassName="font-bold">  My Products </NavLink>
             </li>
 
-            <li className="mb-2">
+            <li className="flex items-center gap-2 mb-3">
+              <FaSave></FaSave>
               <NavLink
-                to="/dashboard/overview"
+                to="/dashboard/addproduct"
                 className="hover:text-white"
                 activeClassName="font-bold"
               >
-                Overview
+                Add Product
               </NavLink>
             </li>
           </ul>

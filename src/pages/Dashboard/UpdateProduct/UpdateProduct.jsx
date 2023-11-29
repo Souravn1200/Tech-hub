@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { AuthContext } from '../../../Providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 
 const UpdateProduct = () => {
@@ -57,6 +58,13 @@ const UpdateProduct = () => {
         console.log(res.data);
         if(res.data.acknowledged === true) {
             navigate('/dashboard/myproducts')
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Product Updated",
+              showConfirmButton: false,
+              timer: 1500
+            });
           }
       })
       .then(err=> {
