@@ -16,6 +16,7 @@ import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductRev
 import ReportedContent from "../pages/Dashboard/ReportedContent/ReportedContent";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -37,52 +38,52 @@ export const router = createBrowserRouter([
       },
       {
         path: 'products',
-        loader:() => fetch('http://localhost:5000/products'),
+        loader:() => fetch('https://techhub-server-two.vercel.app/products'),
         element:<Products></Products>
       },
       {
         path: 'product/:id',
-        loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`),
+        loader: ({params}) => fetch(`https://techhub-server-two.vercel.app/product/${params.id}`),
         element: <Product></Product>
       },
     
     ]
   },
   {
-    path: 'dashboard',
-    element: <Dashboard></Dashboard>,
+    path: '/dashboard',
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
-        path: 'myprofile',
-        element:<Myprofile></Myprofile>
+        path: '/dashboard/myprofile',
+        element:<PrivateRoute><Myprofile></Myprofile></PrivateRoute>
       },
       {
-        path: 'addproduct',
+        path: '/dashboard/addproduct',
         element: <Addproduct></Addproduct>
       },
       {
-        path: 'myproducts',
+        path: '/dashboard/myproducts',
         element: <Myproduct></Myproduct>
       },
       {
-        path: 'payment',
+        path: '/dashboard/payment',
         element: <Payment></Payment>
       },
       {
-        path: 'updateproduct/:id',
-        loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`),
+        path: '/dashboard/updateproduct/:id',
+        loader: ({params}) => fetch(`https://techhub-server-two.vercel.app/product/${params.id}`),
         element: <UpdateProduct></UpdateProduct>
       },
       {
-        path:'prodcutreviewqueue',
+        path:'/dashboard/prodcutreviewqueue',
         element:<ProductReviewQueue></ProductReviewQueue>
       },
       {
-        path:'reportedcontent',
+        path:'/dashboard/reportedcontent',
         element:<ReportedContent></ReportedContent>
       },
       {
-        path:'manageusers',
+        path:'/dashboard/manageusers',
         element:<ManageUsers></ManageUsers>
       }
     ]

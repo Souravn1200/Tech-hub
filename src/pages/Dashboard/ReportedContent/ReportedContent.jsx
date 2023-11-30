@@ -16,7 +16,7 @@ const ReportedContent = () => {
     },[product])
 
     const handleDelete = (productId) => {
-        // Logic for deleting a product
+        
         console.log(`Deleting product with ID: ${productId}`);
     
     

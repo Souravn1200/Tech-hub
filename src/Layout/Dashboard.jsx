@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCompressAlt, FaHome, FaListAlt, FaPeopleArrows, FaPeopleCarry, FaQuora, FaSave, FaSearch, FaUser } from 'react-icons/fa';
+import { FaCompressAlt, FaHome, FaListAlt, FaPeopleArrows, FaQuora, FaSave, FaSearch, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import useAdmin from '../hooks/useAdmin';
 import useMod from '../hooks/useMod';

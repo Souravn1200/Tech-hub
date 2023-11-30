@@ -13,7 +13,7 @@ const Navbar = () => {
         
     }
         <li className='mr-1 font-thin'> <NavLink to="/products">Products</NavLink></li>
-        <li className='mr-1 font-thin'> <NavLink to="/mybooking">My Bookings</NavLink></li>
+
 
     </>
     // TODO user to make dinamic

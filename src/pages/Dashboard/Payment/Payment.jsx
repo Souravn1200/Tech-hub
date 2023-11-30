@@ -1,15 +1,18 @@
-import React from 'react';
-const stripePromise = loadStripe('h');
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
+// TODO: add publishable key
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
     return (
         <div>
-             <div className="flex justify-center items-center mb-10">
-  <div className="text-center">
-    <h2 className="text-3xl font-bold mb-2"> Payment</h2>
-    <p className="text-gray-600">Pay to use our services</p>
-  </div>
-</div>
             
+            <div>
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm></CheckoutForm>
+                </Elements>
+            </div>
         </div>
     );
 };

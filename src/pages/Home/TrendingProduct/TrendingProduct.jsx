@@ -6,7 +6,7 @@ const TrendingProduct = () => {
     const [trending, setTrending] = useState([]);
 
     useEffect( () => {
-        fetch('http://localhost:5000/products')
+        fetch('https://techhub-server-two.vercel.app/products')
         .then(res => res.json())
         .then(data => {
             const isTrending = data.filter(item => item.isTrending === true)

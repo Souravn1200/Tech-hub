@@ -38,8 +38,10 @@ const handleGoogleSignIn = () => {
             name: result.user?.displayName,
             isUser : true,
             isAdmin : false,
-            isMod : false
+            isMod : false,
+            subscribe: false
 
+            
         }
         axiosPublic.post('/users', userInfo)
         .then(res => {

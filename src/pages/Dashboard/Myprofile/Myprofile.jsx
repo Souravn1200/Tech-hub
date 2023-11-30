@@ -1,46 +1,65 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { Link } from "react-router-dom";
-
+import useUsers from "../../../hooks/useUsers";
 
 const Myprofile = () => {
-    const {user} = useContext(AuthContext);
-  // const [isSubscribed, setIsSubscribed] = useState(false);
-  // const subscriptionAmount = '$9.99';
-  // const handleSubscribe = () => {
-  //   setIsSubscribed(true);
-  // };
+  const { user } = useContext(AuthContext);
+  const [users, , isPending] = useUsers();
 
-    return (
-        <div className="flex justify-left items-center">
-      <div className="shadow-md rounded-lg p-8">
-        <h1 className="text-3xl font-semibold mb-4">User Profile</h1>
-        <div className="flex items-center mb-6">
-          <div className="w-20 h-20 rounded-full overflow-hidden">
-            <img
-              src={user?.photoURL}
-              alt="User's Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="ml-4">
-            <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-            <p className="text-gray-600">{user?.email}</p>
-          </div>
+  return (
+    <>
+      {isPending ? (
+        <div>
+          <span className="loading loading-bars loading-lg mx-auto"></span>
         </div>
-        
+      ) : (
+        <div className="">
+          <div className="w-20 h-20 mx-auto mt-4 rounded-full ">
+                  <img
+                    src={user?.photoURL}
+                    alt="User's Profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-      <Link to='/dashboard/payment'> 
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 w-full"
-            // onClick={handleSubscribe}
-          >
-            Pay to subscribe
-          </button>
-          </Link>
-      </div>
-    </div>
-    );
+          {users.map((profileUser) => (
+            <div key={profileUser?._id} className="max-w-sm mx-auto mb-4">
+              <div className="bg-white shadow-md rounded-lg overflow-hidden flex items-center justify-center">
+                
+                <div className="px-6 py-4">
+                  <div className="mb-2">
+                    <h1 className="text-2xl font-semibold">
+                      User Profile
+                    </h1>
+                  </div>
+                  <div className="mb-2">
+                    <h2 className="text-xl font-semibold">
+                      {profileUser?.name}
+                    </h2>
+                    <p className="text-gray-600">
+                      {profileUser?.email}
+                    </p>
+                  </div>
+                  {profileUser?.subscribe ? (
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
+                      Verified
+                    </button>
+                  ) : (
+                    <Link to="/dashboard/payment">
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
+                        Pay to subscribe $10
+                      </button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Myprofile;

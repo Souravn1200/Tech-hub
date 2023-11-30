@@ -12,7 +12,7 @@ const ProductReviewQueue = () => {
    
     // const axiosPublic = useAxiosPublic()
     // useEffect( () => {
-    //     fetch('http://localhost:5000/products')
+    //     fetch('https://techhub-server-two.vercel.app/products')
     //     .then(res => res.json())
     //     .then(data => {
     //         const isPending = data.filter(item => item.status === 'Pending' )
@@ -23,8 +23,7 @@ const ProductReviewQueue = () => {
     
 
     const makeFeatured = (productId) => {
-        // Logic to make a product featured
-        // You can use axios or your preferred method to update the product
+       
         console.log(`Make product ${productId} featured`);
 
 
@@ -48,8 +47,7 @@ const ProductReviewQueue = () => {
       
     
       const acceptProduct = (productId) => {
-        // Logic to accept a product
-        // Similar to makeFeatured, update the product to change its status
+        
         console.log(`Accept product ${productId}`);
         axiosPublic.patch(`/prodcutaccept/${productId}`)
         .then(res => {
@@ -69,8 +67,7 @@ const ProductReviewQueue = () => {
       };
 
       const rejectProduct = (productId) => {
-        // Logic to accept a product
-        // Similar to makeFeatured, update the product to change its status
+      
         console.log(`Accept product ${productId}`);
         axiosPublic.patch(`/prodcutreject/${productId}`)
         .then(res => {

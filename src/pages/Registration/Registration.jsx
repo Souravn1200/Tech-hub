@@ -50,7 +50,8 @@ const Registration = () => {
                     email,
                     isUser : true,
                     isAdmin : false,
-                    isMod : false
+                    isMod : false,
+                    subscribe: false
 
                 }
 
