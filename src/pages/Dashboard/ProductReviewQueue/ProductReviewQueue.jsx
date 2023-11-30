@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useAxiosPublic, { axiosPublic } from '../../../hooks/useAxiosPublic';
+import  { axiosPublic } from '../../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import useProducts from '../../../hooks/useProducts';
 
@@ -9,16 +9,6 @@ const ProductReviewQueue = () => {
 
     // const [queue, setQueue] = useState([]);
 
-   
-    // const axiosPublic = useAxiosPublic()
-    // useEffect( () => {
-    //     fetch('https://techhub-server-two.vercel.app/products')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         const isPending = data.filter(item => item.status === 'Pending' )
-    //         setQueue(isPending)
-    //     })
-    // },[])
 
     
 
