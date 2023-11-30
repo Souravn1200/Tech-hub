@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import { Link } from "react-router-dom";
 
 
 const Myprofile = () => {
     const {user} = useContext(AuthContext);
-  const [isSubscribed, setIsSubscribed] = useState(true);
-  const subscriptionAmount = '$9.99';
-  const handleSubscribe = () => {
-    setIsSubscribed(true);
-  };
+  // const [isSubscribed, setIsSubscribed] = useState(false);
+  // const subscriptionAmount = '$9.99';
+  // const handleSubscribe = () => {
+  //   setIsSubscribed(true);
+  // };
 
     return (
         <div className="flex justify-left items-center">
@@ -27,19 +28,16 @@ const Myprofile = () => {
             <p className="text-gray-600">{user?.email}</p>
           </div>
         </div>
-        {!isSubscribed && (
+        
+
+      <Link to='/dashboard/payment'> 
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
-            onClick={handleSubscribe}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 w-full"
+            // onClick={handleSubscribe}
           >
-            Subscribe ({subscriptionAmount})
+            Pay to subscribe
           </button>
-        )}
-        {isSubscribed && (
-          <div className="bg-green-200 text-green-700 px-4 py-2 rounded-md mb-4">
-            <p>Status: Verified</p>
-          </div>
-        )}
+          </Link>
       </div>
     </div>
     );

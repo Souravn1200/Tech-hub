@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
-import useUsers from '../../../hooks/useUsers';
-import { Link } from 'react-router-dom';
+
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
 
 const ManageUsers = () => {
-    const [users, refetch] = useUsers();
-    console.log(users);
+    const axiosSecure = useAxiosSecure();
+
+    const { refetch, data: users = [] } = useQuery({
+      queryKey: ['users'],
+      queryFn: async () => {
+        const res = await axiosSecure.get('/users');
+        return res.data;
+      }
+    });
 
     const axiosPublic = useAxiosPublic()
 

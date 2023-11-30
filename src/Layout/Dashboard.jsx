@@ -1,11 +1,13 @@
 import React from 'react';
 import { FaCompressAlt, FaHome, FaListAlt, FaPeopleArrows, FaPeopleCarry, FaQuora, FaSave, FaSearch, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
+import useMod from '../hooks/useMod';
 
 const Dashboard = () => {
 //todo ismod is admi thik kortehobe
-  const isMod = false
-  const isAdmin = true;
+  const [isMod] = useMod();
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex w-screen h-screen">
@@ -18,12 +20,9 @@ const Dashboard = () => {
 
           {
             isAdmin ? <>
-            <li className=" flex items-center gap-2 mb-3 ">
-            <FaUser></FaUser>
-              <NavLink
-                to="/dashboard/myprofile" className="hover:text-white"
-                activeClassName="font-bold">  My Profile </NavLink>
-            </li>
+
+<div className="divider divider-info"> Admin </div>
+           
 
             <li className="flex items-center gap-2 mb-3">
             <FaPeopleArrows></FaPeopleArrows>
@@ -32,28 +31,14 @@ const Dashboard = () => {
                 activeClassName="font-bold"> Manage Users </NavLink>
             </li>
 
-            <li className="flex items-center gap-2 mb-3">
             
-            <FaSearch />
-              <NavLink
-                to="/dashboard/myproducts" className="hover:text-white"
-                activeClassName="font-bold">  My Products </NavLink>
-            </li>
-
-            <li className="mb-2">
-              <NavLink
-                to="/dashboard/overview"
-                className="hover:text-white"
-                activeClassName="font-bold"
-              >
-                Overview
-              </NavLink>
-            </li>
 </> : <></>
           }
 
           {
             isMod ? <>
+
+<div className="divider divider-info"> Moderator </div>
             <li className=" flex items-center gap-2 mb-3 ">
             <FaQuora></FaQuora>
               <NavLink
@@ -80,7 +65,12 @@ const Dashboard = () => {
 
 
 
-
+            <li className=" flex items-center gap-2 mb-3 ">
+            <FaUser></FaUser>
+              <NavLink
+                to="/dashboard/myprofile" className="hover:text-white"
+                activeClassName="font-bold">  My Profile </NavLink>
+            </li>
 
             <li className=" flex items-center gap-2 mb-3 ">
             <FaHome></FaHome>
