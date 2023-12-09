@@ -1,8 +1,8 @@
-# React + Vite
+-- Made this Tech Site with MongoDB, Express, React and Node Js.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Authentication System
+- Product Review
+- Report Count
+- Admin, Moderator and User Panel
+- Role dividation
+- Product post, edit, delete system 
